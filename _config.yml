@@ -29,7 +29,7 @@ github_username:  lifeofaprocrastinator
 linkedin_username: simone-caldarella-16930b16a
 
 # Build settings
-theme: jekyll-theme-clean-blog
+remote-theme: jekyll-theme-clean-blog
 paginate:           5
 paginate_path:      "/posts/page:num/"
 plugins:
