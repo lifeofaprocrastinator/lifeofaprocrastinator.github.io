@@ -21,5 +21,3 @@ Apart from being a procrastinator I have just started a PhD in Artificial Intell
 ## Am I Enough?
 
 ## Now
-
-This is a *Markdown* Paragraph.
