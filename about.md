@@ -2,7 +2,7 @@
 layout: page
 title: About Me
 description: '<p style="font-size: xx-small; color: white;"> Image by <a style="font-size: xx-small; color: white;" href="https://www.freepik.com/free-vector/hand-drawn-question-mark-pattern_26539480.htm#query=Question%20mark&position=19&from_view=search&track=ais">Freepik</a> </p>'
-background: '/img/about.jpg'
+background: '/img/about-min.jpg'
 ---
 
 
