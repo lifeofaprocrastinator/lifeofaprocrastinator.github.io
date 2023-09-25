@@ -2,7 +2,7 @@
 layout: post
 title: "Large Language Models (LLMs) and Reasoning"
 subtitle: "Should you fear them?"
-date: 2023-09-22
+date: 2023-10-22
 author: "Simone"
 background: '/img/ai_doom_cover.jpeg'
 ---
