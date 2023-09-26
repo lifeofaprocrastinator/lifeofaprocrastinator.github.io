@@ -2,7 +2,7 @@
 layout: post
 title: "Understanding Forward-Forward Algorithm"
 subtitle: "An exploration to the new optimization algorithm"
-date: 2023-09-01
+date: 2023-10-01
 author: "Simone"
 background: '/img/optimization_cover.jpg'
 ---

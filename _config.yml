@@ -28,7 +28,7 @@ url: "lifeofaprocrastinator.github.io" # the base hostname & protocol for your s
 twitter_username: 
 github_username:  lifeofaprocrastinator
 linkedin_username: simone-caldarella-16930b16a
-
+google_analytics: G-SFSCBK9L8Y
 # Build settings
 remote-theme: jekyll-theme-clean-blog
 paginate:           5
