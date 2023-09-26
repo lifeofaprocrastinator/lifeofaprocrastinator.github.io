@@ -2,7 +2,7 @@
 layout: post
 title: "An (un)Expected Journey"
 subtitle: "How to not write a thesis"
-date: 2023-10-01
+date: 2023-10-15
 author: "Simone"
 background: '/img/unexpected-journey-cover.jpg'
 ---

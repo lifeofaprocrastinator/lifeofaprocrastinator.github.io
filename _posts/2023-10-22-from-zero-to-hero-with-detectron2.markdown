@@ -2,7 +2,7 @@
 layout: post
 title: "From Zero to Hero with Detectron2"
 subtitle: "A comprehensive guide to build and customize object recognition models"
-date: 2023-10-08
+date: 2023-10-22
 author: "Simone"
 background: '/img/detectron2_cover.jpg'
 ---
