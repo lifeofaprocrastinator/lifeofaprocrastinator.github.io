@@ -5,19 +5,22 @@ description: '<p style="font-size: xx-small; color: white;"> Image by <a style="
 background: '/img/about-min.jpg'
 ---
 
+"Hi 👋! Welcome to my blog.
 
-Hi all. My name is *Simone* and I am a **procrastinator**.
+My name is Simone, and I am an AI Engineer. 
+<!---I'm also a PhD student in Computer Science conducting research on theoretical AI.---> 
+I work as a Data Scientist for a marketing company in Italy and had an internship as a Computer Vision Engineer in Toyota Motor Europe. 
 
-I started this job the day I was born, and since then I persevered to being a procrastinator every day.
+I love programming and math and I write code since 2012 (old but gold Pascal). For any further information about me check out my personal website [simonecaldarella.github.io](https://simonecaldarella.github.io).
 
-Apart from being a procrastinator I have just started a PhD in Artificial Intelligence. I recently graduate in an Ms.C. in AI and after some doubts I decided to continue with the academic career for other 3 years. My goal is to work in R&D in private companies doing great research, mainly product oriented. 
+I've created this blog with the aim of sharing my passions and interests, which range from critical thinking and personal development to technical topics related to my studies and finance.
 
-## My Lego era
+The name "Life of a procrastinator" best describes me because I consider myself a *professional* **procrastinator**. This is likely a consequence of my highly variable attention span (which is usually very short, except for rare moments of intense focus - no worries, I'm planning to take an ADHD test sooner or later).
 
-## Pascal and lot of free time
+I decided to start this blog while I was working on my master's thesis as a way to have a thesis journal. As you can imagine, the main reason I focused on it was to procrastinate the actual thesis writing process. And guess what, later on, I even procrastinated on writing an article about my thesis.
 
-## Dunning-Kruger effect
+I've read numerous books and articles about finding focus and overcoming procrastination. However, what I've come to understand is that all of us have certain characteristics and habits that cannot be completely overcome. The best approach is a combination of acceptance and finding workarounds. For instance, if you notice that even with 110% of your *willpower* you get distracted during lessons, even on topics you enjoy, it's better to use that time to learn those things in a way that you've discovered works best for you.
 
-## Am I Enough?
+However, I don't want to get too caught up in chatter here. I hope that you, as someone probably similar to me, will find my articles engaging to read, or at the very least, useful for your needs.
 
-## Now
+Thank you for your attention, and goodbye 😎! 
