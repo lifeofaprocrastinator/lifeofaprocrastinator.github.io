@@ -15,7 +15,7 @@ layout: default
           <div class="post-heading">
             <h1  style="font-size: 30pt">{{ page.title }}</h1>
             {% if page.subtitle %}
-            <h2 class="subheading">{{ page.subtitle }}</h2>
+            <h2 style="color: white" class="subheading">{{ page.subtitle }}</h2>
             {% endif %}
             <span class="meta">Posted by
               <a href="#">{% if page.author %}{{ page.author }}{% else %}{{ site.author }}{% endif %}</a>
@@ -26,6 +26,13 @@ layout: default
         </div>
       </div>
     </div>
+
+    <style>
+      h2 {
+        color: rgb(185, 16, 16);
+      }
+    </style>
+    
   </header>
 
   <div class="container">

@@ -25,9 +25,50 @@ background: '/img/optimization_cover.jpg'
 
 ## Motivations
 
+Let's see why it has been developed
+
+#### Drawbacks in backpropagation
+
+There is no convincing evidence
+that cortex explicitly propagates error derivatives or stores neural activities for use in a subsequent
+backward pass. The top-down connections from one cortical area to an area that is earlier in the
+visual pathway do not mirror the bottom-up connections as would be expected if backpropagation
+was being used in the visual system. Instead, they form loops in which neural activity goes through
+about half a dozen cortical layers in the two areas before arriving back where it started.
+Backpropagation through time as a way of learning sequences is especially implausible. To deal with
+the stream of sensory input without taking frequent time-outs, the brain needs to pipeline sensory
+data through different stages of sensory processing and it needs a learning procedure that can learn
+on the fly. The representations in later stages of the pipeline may provide top-down information
+that influences the representations in earlier stages of the pipeline at a later time step, but the
+perceptual system needs to perform inference and learning in real time without stopping to perform
+backpropagation.
+
+A further serious limitation of backpropagation is that it requires perfect knowledge of the computation
+performed in the forward pass1
+in order to compute the correct derivatives2
+. If we insert a black
+box into the forward pass, it is no longer possible to perform backpropagation unless we learn a
+differentiable model of the black box. As we shall see, the black box does not change the learning
+procedure at all for the Forward-Forward Algorithm because there is no need to backpropagate
+through it.
+
+#### Interesting properties of forward forward
+
+The main point of this paper is to show that neural networks containing unknown non-linearities do
+not need to resort to reinforcement learning. The Forward-Forward algorithm (FF) is comparable
+in speed to backpropagation but has the advantage that it can be used when the precise details of
+the forward computation are unknown. It also has the advantage that it can learn while pipelining
+sequential data through a neural network without ever storing the neural activities or stopping to
+propagate error derivatives.
+
 
 ## How it works?
 
+Let's take a look on how backprop works before 
+
+#### Backpropagation inside
+
+#### Forward Forward
 <!---In the paper, the <u>goodness</u> is defined as the **<u>norm of the activation vector</u>**. To avoid to propagate this information through the layers, but keep propagating the computed features, **layer normalization**. <u>LN</u> normalizes the activation vector, maintaining the **direction** of the activation vector (the propagated features) and reducing the magnitude to 1 (removing any goodness trace before propagating to the next layer)--->
 
 
