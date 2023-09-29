@@ -11,7 +11,6 @@ background: '/img/optimization_cover.jpg'
 > Paper author: Geoffrey Hinton<br>
 > Publish date: 2022-12-27<br>
 > Link to the paper: [Forward Forward Paper](https://www.cs.toronto.edu/~hinton/FFA13.pdf)<br>
-> Tags: #AI #theoretical #pro
 
 ## TL;DR
 
