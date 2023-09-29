@@ -7,7 +7,7 @@ layout: page
     <title>#{{page.tag}}</title>
   </head>
   <body>
-    <h1>#{{page.tag}}</h1>
+    <h1><<a class="post" href="/tags/{{page.tag}}">#{{page.tag}}</a></h1>
     <ul>
       {% for post in site.posts %}
       {% if post.tags contains page.tag %}
