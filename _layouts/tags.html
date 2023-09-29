@@ -1,10 +1,13 @@
-<!doctype html>
-<html>
+---
+layout: page
+---
+
+
   <head>
-    <title>Tag: #{{page.tag}}</title>
+    <title>#{{page.tag}}</title>
   </head>
   <body>
-    <h1>Tag: #{{page.tag}}</h1>
+    <h1>#{{page.tag}}</h1>
     <ul>
       {% for post in site.posts %}
       {% if post.tags contains page.tag %}

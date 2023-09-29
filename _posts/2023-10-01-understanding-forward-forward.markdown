@@ -4,11 +4,14 @@ title: "Understanding Forward-Forward Algorithm"
 subtitle: "An exploration to the new optimization algorithm"
 date: 2023-9-01
 author: "Simone"
-tags: AI optimization pro
+tags: AI theoretical pro
 background: '/img/optimization_cover.jpg'
 ---
 
-Link to the paper: [Forward Forward Paper](https://www.cs.toronto.edu/~hinton/FFA13.pdf)
+> Paper author: Geoffrey Hinton<br>
+> Publish date: 2022-12-27<br>
+> Link to the paper: [Forward Forward Paper](https://www.cs.toronto.edu/~hinton/FFA13.pdf)<br>
+> Tags: #AI #theoretical #pro
 
 ## TL;DR
 

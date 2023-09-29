@@ -18,12 +18,14 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
+author: Simone Caldarella
 title: Life of a procrastinator
 navbar_title: L.o.a.p.
 email: loap.project@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   An output buffer for my weekly thoughts
 baseurl: "" # the subpath of your site, e.g. /blog
+hashtag_background: /img/hashtags.jpg
 url: "lifeofaprocrastinator.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
 github_username:  lifeofaprocrastinator
@@ -36,7 +38,8 @@ paginate_path:      "/posts/page:num/"
 plugins:
   - jekyll-feed
   - jekyll-paginate
-  - jekyll-sitemap ## Uncomment this line to silently generate a sitemaps.org compliant sitemap for your Jekyll site
+  - jekyll-sitemap
+  - jekyll-hashtags
 
 # Exclude from processing.
 # The following items will not be processed, by default.
