@@ -22,6 +22,9 @@ background: '/img/forward_forward/optimization_cover.jpg'
 
 * Being an introductory exploration, this new algorithm has not been tested in enough different scenarios yet
 
+# WORK IN PROGRESS
+
+<!---
 
 ## Motivations
 
@@ -82,3 +85,5 @@ In the paper, the <u>goodness</u> is defined as the **<u>norm of the activation 
 
 
 ## Conclusions
+
+--->
