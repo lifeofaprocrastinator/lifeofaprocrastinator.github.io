@@ -5,7 +5,7 @@ subtitle: "An exploration to the new optimization algorithm"
 date: 2023-9-01
 author: "Simone"
 tags: AI theoretical pro
-background: '/img/optimization_cover.jpg'
+background: '/img/forward_forward/optimization_cover.jpg'
 ---
 
 > Paper author: Geoffrey Hinton<br>
@@ -62,14 +62,23 @@ sequential data through a neural network without ever storing the neural activit
 propagate error derivatives.
 
 
+
 ## How it works?
 
 Let's take a look on how backprop works before 
 
+
+
+
 #### Backpropagation inside
+<img src="/img/forward_forward/backprop.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
 
 #### Forward Forward
-<!---In the paper, the <u>goodness</u> is defined as the **<u>norm of the activation vector</u>**. To avoid to propagate this information through the layers, but keep propagating the computed features, **layer normalization**. <u>LN</u> normalizes the activation vector, maintaining the **direction** of the activation vector (the propagated features) and reducing the magnitude to 1 (removing any goodness trace before propagating to the next layer)--->
+<img src="/img/forward_forward/forward.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
+<img src="/img/forward_forward/layer_norm.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
+<img src="/img/forward_forward/positive.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 40%;"/>
+
+In the paper, the <u>goodness</u> is defined as the **<u>norm of the activation vector</u>**. To avoid to propagate this information through the layers, but keep propagating the computed features, **layer normalization**. <u>LN</u> normalizes the activation vector, maintaining the **direction** of the activation vector (the propagated features) and reducing the magnitude to 1 (removing any goodness trace before propagating to the next layer
 
 
 ## Conclusions
