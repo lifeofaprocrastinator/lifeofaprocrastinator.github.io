@@ -39,7 +39,7 @@ Initially, neural networks were developed with the hope of mimicking human brain
 
 Another significant drawback of backpropagation is its dependence on having complete knowledge of the calculations made during the forward pass to calculate accurate derivatives. If we introduce a black box into the forward pass, backpropagation becomes unfeasible unless we can develop a differentiable model for that black box. Interestingly, for the Forward-Forward Algorithm, the presence of a black box doesn't alter the learning process whatsoever, as there's no need for backpropagation through it.
 
-One last fundamental drawback, cited before, is the memory footprint. Backpropagation requires storing activations of all intermediate layers. This practical concern becomes evident when aiming to implement exceptionally deep neural architectures in a production environment. This issue becomes particularly tedious when there is a need for frequent retraining of models using updated datasets. In such scenarios, the challenges associated with deploying and maintaining these deep models become even more pronounced, potentially affecting the efficiency and agility of the production pipeline.
+One last fundamental drawback, cited before, is the memory usage. Backpropagation requires storing activations of all intermediate layers. This practical concern becomes evident when aiming to implement deep neural architectures in a production environment where efficiency is a requisite. In such scenarios, the challenges associated with deploying and maintaining these deep models become even more pronounced, potentially affecting the efficiency and agility of the production pipeline.
 
 
 #### Interesting properties of forward forward
@@ -54,6 +54,14 @@ Now let's discover about how practically this new algorithm works, starting from
 
 
 #### Backpropagation inside
+
+A backpropagation algorithm involves three main steps, depicted below.
+
+1. In the first step the input is propagated through the model computing all the intermediate activations (and storing them) and the output.
+
+2. In the second step, depending on the task (classification or regression) a loss function (Cross Entropy in the example) is used to compute the loss/distance between the outputs and the desired results. The aggregated loss (sum of distances) is then used to perform a learning step of the model.
+
+3. In the third step the gradient of the loss is computed (direction of max increase) and is propagated to all the parameters of the model. Here the idea is to find the contribution of each weight in the final value of the loss, by decomposing the entire loss gradient using the chain rule. Once each contribution (given the input) is computed, all the weights are updated by $$ - \lambda \cdot  \partial L_{CE} $$, where $$\lambda$$ is a scalar that represents the learning rate.
 
 <img src="/img/forward_forward/backprop.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
 
