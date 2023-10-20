@@ -2,7 +2,7 @@
 layout: post
 title: "Understanding Forward-Forward Algorithm"
 subtitle: "An exploration to the new optimization algorithm"
-date: 2023-10-08
+date: 2023-11-08
 author: "Simone"
 tags: AI theoretical pro
 background: '/img/forward_forward/optimization_cover.jpg'

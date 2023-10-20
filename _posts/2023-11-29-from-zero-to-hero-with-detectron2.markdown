@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "An (un)Expected Journey"
-subtitle: "How to not write a thesis"
-date: 2023-10-22
+title: "From Zero to Hero with Detectron2"
+subtitle: "A comprehensive guide to build and customize object recognition models"
+date: 2023-11-29
 author: "Simone"
-background: '/img/unexpected-journey-cover.jpg'
+background: '/img/detectron2_cover.jpg'
 ---
 
 I want to use this space to write a not comprehensive but useful guide on how to write your master thesis without going crazy. Hope the tips and tricks contained here could be beneficial for any of you.
