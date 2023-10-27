@@ -63,11 +63,11 @@ A back-propagation algorithm involves three main steps, depicted below.
 
 1. In the first step the input is propagated through the model computing all the intermediate activations (and storing them) and the output.
 
-    <img src="/img/forward_forward/backprop1.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
+    <img src="/img/forward_forward/backprop1.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 80%;"/>
 
 2. In the second step, depending on the task (classification or regression) a loss function (Cross Entropy in the example) is used to compute the loss/distance between the outputs and the desired results. The aggregated loss (sum of distances) is then used to perform a learning step of the model.
 
-    <img src="/img/forward_forward/backprop2.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 40%;"/>
+    <img src="/img/forward_forward/backprop2.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 60%;"/>
 
 3. In the third step the gradient of the loss is computed (direction of max increase) and is propagated to all the parameters of the model. Here the idea is to find the contribution of each weight in the final value of the loss, by decomposing the entire loss gradient using the chain rule. Once each contribution (given the input) is computed, all the weights are updated by $$ - \lambda \cdot  \partial L_{CE} $$, where $$\lambda$$ is a scalar that represents the learning rate.
 
@@ -81,17 +81,18 @@ The positive pass processes actual data, adjusting weights to enhance the <u>goo
 
 Let's now take a look on the inner working of a forward pass by analyzing what happens inside a single layer. Given the layer independence property of forward-forward, understanding the inner working of one layer is equal to understand how the entire process works. 
 
-Initially, the input is provided to the network and an intermediate representation is obtained.
+Initially, a positive input is provided to the network and an intermediate representation $$ y_i^1 $$ is obtained. The goodness score of the input at the given layer ($$goodness^1$$) is then computed as the sigmoid of the norm of the input vector minus a decision threshold (which is an hyperparameter). Defining the goodness as the norm of the vector (or length of the vector, for those who prefer such phrasing) is not mandatory, but appears to be quite useful. 
 
-<img src="/img/forward_forward/forwardforward.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 60%;"/>
 
-including minus the sum of the squared activities. If the positive and negative passes could be separated in time, the negative passes could be done offline, which would make the learning much simpler in the positive pass and allow video to be pipelined through the network without ever storing activities or stopping to propagate derivatives
+<img src="/img/forward_forward/forwardforward.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
 
-<img src="/img/forward_forward/layer_norm.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
+As we mentioned before, one of our goal is obtaining layers independence at training/inference time, which guarantess that less resources are employed to run a model. Now, if after the first layer we would simply propagate the vector through the next layers, what would avoid the network to learn the identity vector? If we think about it, it would be computationally cheaper, once reached a positive goodness at a layer $$L$$, to keep all the $$l > L$$ layers' weights equal to $$\mathbb{1}$$. In order to circumvent this behaviour and propagate only a useful part of the original input, a layer normalization step is applied. The formula, which is depicted in the figure below, returns the normalized input vector. The goodness (i.e. the length) is then "removed" before the propagation, but the original information (given by the direction of the vector) is preserved for the next steps.
 
-including minus the sum of the squared activities. If the positive and negative passes could be separated in time, the negative passes could be done offline, which would make the learning much simpler in the positive pass and allow video to be pipelined through the network without ever storing activities or stopping to propagate derivatives
+<img src="/img/forward_forward/layer_norm.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 80%;"/>
 
-<img src="/img/forward_forward/positive.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 40%;"/>
+
+
+<img src="/img/forward_forward/positive.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 60%;"/>
 
 In the paper, the <u>goodness</u> is defined as the **<u>norm of the activation vector</u>**. To avoid to propagate this information through the layers, but keep propagating the computed features, **layer normalization**. <u>LN</u> normalizes the activation vector, maintaining the **direction** of the activation vector (the propagated features) and reducing the magnitude to 1 (removing any goodness trace before propagating to the next layer
 
