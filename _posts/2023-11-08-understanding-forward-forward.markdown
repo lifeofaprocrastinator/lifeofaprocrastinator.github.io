@@ -10,26 +10,26 @@ background: '/img/forward_forward/optimization_cover.jpg'
 
 > Paper author: Geoffrey Hinton<br>
 > Publish date: 2022-12-27<br>
-> Link to the paper: [forward-forward Paper](https://www.cs.toronto.edu/~hinton/FFA13.pdf)<br>
+> Link to the paper: [Forward-Forward Paper](https://www.cs.toronto.edu/~hinton/FFA13.pdf)<br>
 
 ## TL;DR
 
-* The new **forward-forward** optimization algorithm is a novel learning procedure for neural networks that <u>replaces</u> the <u>forward and backward passes</u> of back-propagation with <u>two forward passes</u>, one performed with positive (real) data and the other one performed with negative (synthesized/wrongly labelled) data
+* The new **Forward-Forward** optimization algorithm is a novel learning procedure for neural networks that <u>replaces</u> the <u>forward and backward passes</u> of back-propagation with <u>two forward passes</u>, one performed with positive (real) data and the other one performed with negative (synthesized/wrongly labelled) data
 
-* Instead of computing a **cumulative** loss function, whose gradient is then back-propagated through all the layers, with **forward-forward** each layer has its own objective, i.e. <u>norm of positive samples vector</u>
+* Instead of computing a **cumulative** loss function, whose gradient is back-propagated through all the layers, with **Forward-Forward** each layer has its own objective, i.e. <u>norm of positive samples vector</u>
 
-* Forward-Forward <u>reduces the memory requirements</u> of back-propagation while obtaining comparable performance to its counterpart, however back-propagation is still preferrable when resources are not limited
+* Forward-Forward <u>reduces the memory consumption</u> of back-propagation, while obtaining comparable performance to its counterpart. However back-propagation is still preferrable when resources are not limited
 
-* Being an introductory exploration, this new algorithm has not been tested in enough different scenarios yet
+* Being an introductory exploration, the Forward-Forward has not been tested in enough different scenarios yet to be considered a reliable solution for training a neural network
 
 
 ***
 
-In this article we're going to talk about the newly developed forward-forward algorithm, which should serve as an alternative to the back-propagation learning algorithm. Specifically, in this post I focus on the motivations behind its use-cases and I provide an explanation on how the algorithm works, compared to back-propagation one. 
+In this article we're going to talk about the newly developed Forward-Forward algorithm, which should serve as an alternative to the back-propagation learning algorithm. Specifically, in this post I focus on the motivations behind its use-cases and I provide an explanation on how the algorithm works, compared to back-propagation one. 
 
 ## Motivations
 
-Before delving into the pros of the Forward-Forward Algorithm, it is useful to grasp some of the common flaws of back-propagation, which represent certain limitations. An example is the substantial memory footprint, making it challenging to train a model in an edge computing context. 
+Before delving into the pros of the Forward-Forward Algorithm, it is useful to grasp some of the common flaws of back-propagation, which limitates its use in certain situations.
 
 #### Drawbacks of back-propagation
 
@@ -43,18 +43,18 @@ This challenges the feasibility of back-propagation for learning sequences. To p
 
 Another significant drawback of back-propagation is its dependence on having complete knowledge of the calculations made during the forward pass to calculate accurate derivatives. If we introduce a black box into the forward pass, back-propagation becomes unfeasible unless we can develop a differentiable model for that black box. Interestingly, for the Forward-Forward Algorithm, the presence of a black box doesn't alter the learning process whatsoever, as there's no need for back-propagation through it.
 
-One last fundamental drawback, cited before, is the memory usage. back-propagation requires storing activations of all intermediate layers. This practical concern becomes evident when aiming to implement deep neural architectures in a production environment where efficiency is a requisite. In such scenarios, the challenges associated with deploying and maintaining these deep models become even more pronounced, potentially affecting the efficiency and agility of the production pipeline.
+One last fundamental drawback is the memory usage. Back-propagation requires storing activations of all intermediate layers. This practical concern becomes evident when aiming to implement deep neural architectures in a production environment where efficiency is a requisite. In such scenarios, the challenges associated with deploying and maintaining these deep models become even more pronounced, potentially affecting the efficiency and agility of the production pipeline.
 
 
-#### An interesting property of forward-forward
+#### An interesting property of Forward-Forward
 
-The primary concept behind forward-forward is to eliminate the necessity for a complete computational graph of the model when performing a training step. This enables independent training of intermediate layers in any neural network while avoiding the storage of all intermediate computations.
+The primary concept behind Forward-Forward is to eliminate the necessity for a complete computational graph of the model when performing a training step. This enables independent training of intermediate layers in any neural network while avoiding the storage of all intermediate computations.
 
 This approach results in a more streamlined training algorithm, which can prove highly effective in situations where certain parts of the model are non-differentiable or when the training environment has limited performance.
 
 ## How it works?
 
-Now, before discussing how forward-forward algorithm works, let's explore the inner processes of back-propagation, which is fundamental to understand the improvements that forward-forward proposes. 
+Now, before discussing how Forward-Forward algorithm works, let's explore the inner processes of back-propagation, which is fundamental to understand the improvements that Forward-Forward proposes. 
 
 
 #### Inside back-propagation
@@ -79,29 +79,24 @@ The Forward-Forward algorithm draws inspiration from Boltzmann machines (Hinton 
 
 The positive pass processes actual data, adjusting weights to enhance the <u>goodness</u> in each hidden layer. Conversely, the negative pass deals with "negative data" and tunes weights to diminish the quality in each hidden layer.
 
-Let's now take a look on the inner working of a forward pass by analyzing what happens inside a single layer. Given the layer independence property of forward-forward, understanding the inner working of one layer is equal to understand how the entire process works. 
+Let's now take a look on the inner working of a forward pass by analyzing what happens inside a single layer. Given the layer independence property of Forward-Forward, understanding the inner working of one layer is equal to understand how the entire process works. 
 
 Initially, a positive input is provided to the network and an intermediate representation $$ y_i^1 $$ is obtained. The goodness score of the input at the given layer ($$goodness^1$$) is then computed as the sigmoid of the norm of the input vector minus a decision threshold (which is an hyperparameter). Defining the goodness as the norm of the vector (or length of the vector, for those who prefer such phrasing) is not mandatory, but appears to be quite useful. 
 
 
 <img src="/img/forward_forward/forwardforward.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
 
-As we mentioned before, one of our goal is obtaining layers independence at training/inference time, which guarantess that less resources are employed to run a model. Now, if after the first layer we would simply propagate the vector through the next layers, what would avoid the network to learn the identity vector? If we think about it, it would be computationally cheaper, once reached a positive goodness at a layer $$L$$, to keep all the $$l > L$$ layers' weights equal to $$\mathbb{1}$$. In order to circumvent this behaviour and propagate only a useful part of the original input, a layer normalization step is applied. The formula, which is depicted in the figure below, returns the normalized input vector. The goodness (i.e. the length) is then "removed" before the propagation, but the original information (given by the direction of the vector) is preserved for the next steps.
+As I mentioned before, one of our goal is to obtain layers independence at training/inference time, which guarantess that less resources are employed to run a model. Now, if after the first layer we would simply propagate the vector through the next layers, what would avoid the network to learn the identity vector? If we think about it, it would be computationally cheaper, once reached a positive goodness at a layer $$L$$, to keep all the $$l > L$$ layers' weights equal to $$\mathbb{1}$$. In order to circumvent this behaviour and propagate only a useful part of the original input, a layer normalization step is applied. The formula, which is depicted in the figure below, returns the normalized input vector. The goodness (i.e. the length) is then "removed" before the propagation, but the original information (given by the direction of the vector) is preserved for the next steps.
 
 <img src="/img/forward_forward/layer_norm.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 80%;"/>
 
-
+Let's now take a look to what a positive sample (in supervised learning) is. In the original paper, Hinton proposes to use the first $$C$$ of the image to encode in a one-hot fashion the class corresponding to the object in the picture. Conversely, negative data can be either a perturbated image with the correct label or the same image with a wrong label. The ultimate goal is to have a degree of wrongness that can be used by the model to learn that wrong/negative data should have lower goodness (or higher wrongness). As in the unsupervised paradigm no labels are provided, the concept of wrongness can be crafted either by adding noise or by interpolating two positive images.
 
 <img src="/img/forward_forward/positive.png" alt="drawing" style="display: block; margin-left: auto; margin-right: auto; width: 60%;"/>
 
-In the paper, the <u>goodness</u> is defined as the **<u>norm of the activation vector</u>**. To avoid to propagate this information through the layers, but keep propagating the computed features, **layer normalization**. <u>LN</u> normalizes the activation vector, maintaining the **direction** of the activation vector (the propagated features) and reducing the magnitude to 1 (removing any goodness trace before propagating to the next layer
+In this current formulation, Forward-Forward applied to feed-forward networks avoid to later layers to affect what is learned in earlier layers. Despite this being the key for the layer independence, this prevent the model to learn patterns as a whole. To solve this, Hinton proposes to employ a multi-layer recurrent neural network (rnn) architecture where the input is a *boring* video made up of a repeat image. 
 
-
-In their current formulation, forward-forward applied to feed-forward networks avoid to later layers to affect what is learned in earlier layers. Despite this being the key for the layer independence, this prevent the model to learn patterns as a whole. To solve this, Hinton proposes to employ a multi-layer recurrent neural network (rnn) architecture where the input is a *boring* video made up of a repeat image. 
-
-RNN allows connectivity at different time-step by design and this consent to learn patterns as a whole, without replacing the layer independency of forward-forward. Applied to rnn architecture, the forward-forward become <u>forward-forward in time</u>.
-
-
+RNN allows connectivity at different time-step by design and this consent to learn patterns as a whole, without replacing the layer independency of Forward-Forward. Applied to rnn architecture, the Forward-Forward become <u>Forward-Forward in time</u>.
 
 ## Future works
 
@@ -135,7 +130,7 @@ activity and a set of constraint violation detectors that try to minimize their 
 
 ## Conclusions
 
-In this post I brought the attention to an interesting (novel) algorithm for training neural networks, called **Forward-Forward**. Conceptually this novel paradigm is orthogonal to the back-propagation one, allowing for independent layer learning and improved memory efficiency. Despite being a good alternative in some specific contexts (low-power/low-sepcs), when back-propagation requirements are matched it still outperforms the novel forward-forward, suggesting that many iterations are still required to make it useful in real-life scenarios. 
+In this post I brought the attention to an interesting (novel) algorithm for training neural networks, called **Forward-Forward**. Conceptually this novel paradigm is orthogonal to the back-propagation one, allowing for independent layer learning and improved memory efficiency. Despite being a good alternative in some specific contexts (low-power/low-sepcs), when back-propagation requirements are matched it still outperforms the novel Forward-Forward, suggesting that many iterations are still required to make it useful in real-life scenarios. 
 
 Despite back-propagation seems to dominate in the realm of learning algorithms, the process of research works by little and apparently meaningless steps, which over time leads to greater discoveries and disruptive paradigm shifts. 
 
