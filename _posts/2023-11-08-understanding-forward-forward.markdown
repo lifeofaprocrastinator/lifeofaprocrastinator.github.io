@@ -4,7 +4,7 @@ title: "Understanding Forward-Forward Algorithm"
 subtitle: "An exploration to the new optimization algorithm"
 date: 2023-10-08
 author: "Simone"
-tags: ai research learning
+tags: research learning ai
 background: '/img/forward_forward/optimization_cover.jpg'
 ---
 
